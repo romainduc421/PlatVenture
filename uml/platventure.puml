@@ -1,0 +1,180 @@
+
+@startuml
+skinparam backgroundColor #fff
+skinparam defaultFontColor #37474f
+skinparam defaultFontSize 14
+skinparam defaultFontName serif
+skinparam controlBackgroundColor #fff
+skinparam controlBorderColor #000
+skinparam entityBackgroundColor #fff
+skinparam entityBorderColor #000
+skinparam ArrowColor #000
+skinparam sequenceLifeLineBorderColor #000
+skinparam sequenceBoxBorderColor #FFF
+
+hide footbox
+
+package core{
+  package model{
+    package blocs{
+      class BlocSprite{
+
+      }
+      enum TypeDeBloc{
+
+      }
+      enum UIBloc{
+
+      }
+    }
+
+    package utils{
+      enum Constants{
+
+      }
+      enum EtatJoueur{
+
+      }
+      enum EtatPartie{
+
+      }
+      class LevelChoice{
+
+      }
+      class Map{
+        - int width
+        - int height
+        - double time
+        - int timeByDefault
+        - char[][] map
+        - Player pl
+        + World getPlatVentureWorld()
+        + void getMapFromFich(FileHandle fH)
+        + void updatePlayerPosition()
+        + Iterator<BlocSprite> iterator()
+      }
+      interface Iterable_blocSprite{}
+    }
+    class Gem{
+
+    }
+    class LevelMap{
+
+    }
+    class Player{
+      - int score
+      + Player(BlocSprite playerBlocS, Map map)
+      + boolean isOutOfMap(int tolerance)
+      + Body getBody()
+      + void updateScore(int i)
+      + void resetScore()
+    }
+
+
+  }
+  package sons{
+    enum Sounds{
+
+    }
+  }
+
+  package vues{
+    class MapView{
+      - Box2DDebugRenderer b2ddr
+      - OrthographicCamera orthographicCamera
+      - OrthographicCamera sceneCam
+      - int loadedLevel
+      - boolean debug
+      +void show()
+      +void render(float delta)
+      +void resize(int width, int height)
+      +void dispose()
+      +void resetCamera()
+      +void resetWorld()
+      +void loadLevelUp()
+      +void initEtat(EtatPartie etat)
+    }
+    class PlayerView{
+      - Player pl
+      - float animationTime
+      - Animation<Texture> motionLess
+      - Animation<Texture> jump
+      - Animation<Texture> running
+      + PlayerView(Player p)
+      + void updateAnimation(float fl)
+      + void updateEtat()
+
+    }
+    class StartScreen{
+      + StartScreen(PlatVentureScreen pvS)
+      +void show()
+      +void render()
+      +void dispose()
+    }
+    class World{}
+    class Body{}
+    interface Screen{}
+  }
+
+  class PlatVentureScreen{
+    +void create()
+    +void render()
+    +void resize()
+    +void dispose()
+  }
+  class Game {}
+  package controllers{
+    class PlayerController{
+
+    }
+    interface InputProcessor{
+
+    }
+    interface GestureDetector.GestureListener{
+
+    }
+    class TapController{
+
+    }
+  }
+  package listeners{
+    class CollisionEcouteur{
+
+    }
+    interface ContactListener{
+
+    }
+  }
+}
+
+PlatVentureScreen --|> Game
+StartScreen ..|> Screen
+StartScreen " " -- "1" PlatVentureScreen
+MapView ..|> Screen
+Map ..|> Iterable_blocSprite
+TapController ..|> GestureDetector.GestureListener
+PlayerController ..|> InputProcessor
+CollisionEcouteur ..|> ContactListener
+MapView " " -- "1" PlayerView
+MapView " " -- "1" EtatPartie
+MapView " " -- "1" Map
+MapView " " -- "1" World
+MapView " " -- "*" Body
+
+MapView " " -- "1" LevelMap
+MapView " " -- "1" CollisionEcouteur
+MapView " " -- "1" PlayerController
+PlayerView " " -- "1" EtatJoueur
+MapView " " -- "1" Player
+Player "1" -- "1" Map
+Player " " -- "1" BlocSprite
+LevelMap " " --"1" Map
+MapView " " -- "1" Map
+Map " " -- "*" BlocSprite
+BlocSprite " " -- "1" UIBloc
+
+
+
+
+
+@enduml

@@ -1,0 +1,31 @@
+- PARTIE 0 : définition UML des objets du jeu (au moins les premiers
+objets nécessaires)
+
+- PARTIE 1 : affichages en mode DebugRenderer
+   - Définition caméra monde
+   - Initialisation du moteur physique du jeu
+   - Lecture du fichier de niveau avec construction des Body :
+       1 - briques simples
+       2 - plateaux
+       3 - panneaux
+       4 - gems
+   - Construction du joueur
+   - Ajout des contrôles du joueur
+   - Ajout de l'état du jeu (score, temps,...)
+   - Détection des contacts :
+       1 - avec les gems
+       2 - avec les panneaux
+       3 - avec les briques (pour le son)
+
+- PARTIE 2 : affichages des infos du jeu et gestion de partie
+   - Définition caméra textes
+   - Affichage du score
+   - Affichage du temps restant
+   - Détection perte et victoire (sortie correcte du niveau)
+   - Relance niveau ou changement de niveau
+
+- PARTIE 3 : habillage des objets
+   - Textures des éléments non animés
+   - Animation des gems
+   - Images spécifiques pour le joueur selon son action
+     (bonus : animation complète du joueur)
